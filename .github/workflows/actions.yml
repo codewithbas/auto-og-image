@@ -24,7 +24,8 @@ jobs:
 
       - name: Setup ImageMagick
         uses: jruipinto/ImageMagick-action@v1
-        command: convert -density 85 index.pdf index.png
+        with: 
+          command: convert -density 85 index.pdf index.png
 
 
       - name: remove pdf
