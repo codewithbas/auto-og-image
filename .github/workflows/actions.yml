@@ -22,11 +22,22 @@ jobs:
       - name: build pdf
         run: chrome --headless --print-to-pdf="index.pdf" index.html
 
+      - name: Setup ImageMagick
+        uses: jruipinto/ImageMagick-action@v1
+
+      - name: convert pdf to png
+        run: convert -density 85 index.pdf index.png
+
+
+      - name: remove pdf
+        run: rm index.pdf
+
+
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add index.pdf
+          git add index.png
           git diff-index --quiet HEAD || (git commit -a -m "updated PDFs" --allow-empty)
 
       - name: push changes
