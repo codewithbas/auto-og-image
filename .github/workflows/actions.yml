@@ -1,4 +1,4 @@
-name: create image
+name: run main.py
 
 on:
   push:
@@ -13,21 +13,22 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v3 # checkout the repository content to github runner
 
-      - name: gen pdf
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: beta
-        - run: chrome --headless --print-to-pdf="index.pdf" index.html
 
-      - name: commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add index.pdf
-          git diff-index --quiet HEAD || (git commit -a -m "updated PDFs" --allow-empty)
+      # - name: gen pdf
+      #   uses: browser-actions/setup-chrome@v1
+      #   with:
+      #     chrome-version: beta
+      #   - run: chrome --headless --print-to-pdf="index.pdf" index.html
 
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main 
+      # - name: commit files
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add index.pdf
+      #     git diff-index --quiet HEAD || (git commit -a -m "updated PDFs" --allow-empty)
+
+      # - name: push changes
+      #   uses: ad-m/github-push-action@v0.6.0
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: main 
